@@ -1,0 +1,16 @@
+[package]
+name = "receipt_reader"
+version = "0.1.0"
+edition = "2021"
+crate_type = ["dylib"]
+authors = ["Lucas 'Taewyth' Doula <lucas.doula@gmail.com>"]
+description = "A library that attempt to analyze receipts and turn them into useable data. So far works only in German"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["lib"]
+path = "src/lib.rs"
+
+[dependencies]
+leptess = "0.13.2"
