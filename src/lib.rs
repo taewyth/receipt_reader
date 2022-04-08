@@ -1,9 +1,7 @@
 pub mod receipt_read {
-    /// Reads receipts and sort their items in a vector of Item structures composed of name and
-    /// price.
-    ///
-    /// TODO: try to sort trash data (ex: unwanted lines from Real tickets)
-    
+    // Reads receipts and sort their items in a vector of Item structures composed of name and
+    // price.
+
     use leptess::LepTess;
     use std::{env, f32::INFINITY};
 
@@ -14,9 +12,9 @@ pub mod receipt_read {
     }
 
     pub fn sort_lines(file_name: &str) -> Vec<String> {
-        /// Read each lines on the receipt and only keeps the ones that are supposed to be
-        /// interesting, namely those with numbers between a start (shop dependant) and an end
-        /// (usually "Summe").
+        // Read each lines on the receipt and only keeps the ones that are supposed to be
+        // interesting, namely those with numbers between a start (shop dependant) and an end
+        // (usually "Summe").
 
         let prefix = env::var("TESSDATA_PREFIX").unwrap();
         // TESSDATA_PREFIX is environement variable that needs to be configured.
@@ -86,11 +84,9 @@ pub mod receipt_read {
     }
 
     pub fn sort_items(lines: Vec<String>) -> Vec<Item> {
-        /// Read the lines kept with the previous function and use them to keep items by name and
-        /// price, turning them into Item objects and returning a vector of said objects
-        /// (basically, the ticket)
-        /// TODO: manage the cases where duplicate items are counted before their names instead of
-        /// after
+        // Read the lines kept with the previous function and use them to keep items by name and
+        // price, turning them into Item objects and returning a vector of said objects
+        // (basically, the ticket)
 
         let mut items: Vec<Item> = Vec::new();
         let mut tmp_name: String = String::from("");
@@ -101,10 +97,6 @@ pub mod receipt_read {
                 tmp_name = String::from("");
                 tmp_value = INFINITY;
             }
-           /* else if tmp_value != INFINITY && tmp_name == String::from(""){
-                tmp_value = INFINITY;
-            }*/
-            //tmp_value = INFINITY;
             'words: for word in &work_line {
                 for c in word.chars() {
                     if c.is_alphabetic() {
@@ -135,7 +127,6 @@ pub mod receipt_read {
                             .unwrap()
                             .is_numeric()
                         {
-                           // println!("line: {:?}", work_line);
                             tmp_value = work_line[work_line.len() - 1]
                                 .replace(",", ".")
                                 .parse::<f32>()
